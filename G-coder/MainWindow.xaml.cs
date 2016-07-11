@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using G_coder.ViewModel;
 
-namespace G_coder
+namespace G_coder.View
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

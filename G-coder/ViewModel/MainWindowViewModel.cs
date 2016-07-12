@@ -12,7 +12,8 @@ namespace G_coder.ViewModel
     {
         private string _path;
         private readonly Extruder _extruder = new Extruder();
-        private ObservableCollection<Line> _lines;
+        private ObservableCollection<Field> _fields;
+        private Field _selectedField;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -31,13 +32,23 @@ namespace G_coder.ViewModel
             get { return new RelayCommand(OpenFileExecute, CanOpenFileExecute); }
         }
 
-        public ObservableCollection<Line> Lines
+        public ObservableCollection<Field> Fields
         {
-            get { return _lines; }
+            get { return _fields; }
             set
             {
-                _lines = value;
-                OnPropertyChanged(nameof(Lines));
+                _fields = value;
+                OnPropertyChanged(nameof(Fields));
+            }
+        }
+
+        public Field SelectedField
+        {
+            get { return _selectedField; }
+            set
+            {
+                _selectedField = value; 
+                OnPropertyChanged(nameof(SelectedField));
             }
         }
 
@@ -53,7 +64,7 @@ namespace G_coder.ViewModel
             if (result == true)
             {
                 Path = ofd.SafeFileName;
-                Lines = _extruder.Begin(ofd.FileName);
+                Fields = _extruder.Begin(ofd.FileName);
             }
         }
 
@@ -63,7 +74,7 @@ namespace G_coder.ViewModel
         }
 
 
-
+        
 
 
         [NotifyPropertyChangedInvocator]

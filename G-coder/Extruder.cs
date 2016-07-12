@@ -3,11 +3,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using G_coder.Constructs;
-using Line = G_coder.Constructs.Line;
 
 namespace G_coder
 {
-    public delegate void OnCreatedLinesHandler(Lines lines);
+    public delegate void OnCreatedLinesHandler(Fields fields);
 
     internal class Extruder
     {
@@ -17,7 +16,7 @@ namespace G_coder
         private const string YEndMarker = " 21";
         private const byte LinesToSearch = 13;
 
-        public Lines Lines { get; set; } = new Lines();
+        public Fields Fields { get; set; } = new Fields();
 
 
         private string[] _dxfContent;
@@ -30,7 +29,7 @@ namespace G_coder
         {
         }
 
-        public Lines Begin(string pathToFile)
+        public Fields Begin(string pathToFile)
         {
             LoadFile(pathToFile);
             var lines = FindLines();
@@ -55,9 +54,9 @@ namespace G_coder
             }
         }
 
-        private Lines FindLines()
+        private Fields FindLines()
         {
-            var lines = new Lines();
+            var lines = new Fields();
             double xStart = 0,
                     yStart = 0,
                     xEnd = 0,
@@ -86,7 +85,7 @@ namespace G_coder
                             if (_dxfContent[j] == YEndMarker)
                             {
                                 yEnd = Math.Round(Convert.ToDouble(_dxfContent[j + 1]), 1);
-                                lines.Add(new Line(xStart, xEnd, yStart, yEnd));
+                                lines.Add(new Field(xStart, xEnd, yStart, yEnd));
                             }
 
                         }
@@ -105,9 +104,9 @@ namespace G_coder
 
         }
 
-        public Lines GetRandomLines(int countOfFields, int graphWidth, int graphHeight)
+        public Fields GetRandomLines(int countOfFields, int graphWidth, int graphHeight)
         {
-            var randomLines = new Lines();
+            var randomLines = new Fields();
             const int bufferToFrame = 30;
             //            var numberOfPoints = countOfFields + 6;
             var rand = new Random();
@@ -118,7 +117,7 @@ namespace G_coder
                 var endX = rand.Next(0, graphWidth - bufferToFrame);
                 var startY = rand.Next(5, graphHeight - 10);
                 var endY = rand.Next(5, graphHeight - 10);
-                randomLines.Add(new Line(startX, endX, startY, endY));
+                randomLines.Add(new Field(startX, endX, startY, endY));
             }
             randomLines.SetNearestToCenterAsP0();
             randomLines.CalculateDistances();
@@ -128,10 +127,10 @@ namespace G_coder
             return randomLines;
         }
 
-        private void RaiseCreatedLinesHandler(Lines randomLines)
+        private void RaiseCreatedLinesHandler(Fields randomFields)
         {
             if (CreatedLinesHandler != null)
-                CreatedLinesHandler(randomLines);
+                CreatedLinesHandler(randomFields);
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 
 namespace G_coder.Constructs
 {
-    public class Lines : ObservableCollection<Line>
+    public class Fields : ObservableCollection<Field>
     {
-        public Lines()
+        public Fields()
         {
 
         }

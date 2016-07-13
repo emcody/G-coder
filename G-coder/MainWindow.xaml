@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:G_coder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Background="White">
+        Title="MainWindow" Height="{Binding Height, Mode=TwoWay}" Width="{Binding Width, Mode=TwoWay}" Background="White">
     <Grid DataContext="{Binding}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -25,7 +25,7 @@
         <Label Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="0" Margin="10,10" Content="{Binding Path}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="0" Grid.Row="1" Margin="10,10" Content="{Binding Fields.Count}" ContentStringFormat="Fields count: {0}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="1" Grid.Row="1" Margin="10,10" Content="{Binding SelectedField.Id}" ContentStringFormat="Selected field: {0}" BorderThickness="1" BorderBrush="Black"></Label>
-        <ListView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" ItemsSource="{Binding Fields}" SelectedItem="{Binding SelectedField}">
+        <ListView Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Fields}" SelectedItem="{Binding SelectedField}">
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <Border>
@@ -45,10 +45,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ItemsControl ItemsSource="{Binding Fields}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderThickness="1" BorderBrush="Black">
+        <ItemsControl ItemsSource="{Binding Fields}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="4" BorderThickness="1" BorderBrush="Black">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas/>
+                    <Canvas>
+                        <Canvas.LayoutTransform>
+                            <ScaleTransform ScaleX="2" ScaleY="-1.5" CenterX="1" CenterY="1" />
+                        </Canvas.LayoutTransform>
+                    </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>

@@ -16,6 +16,8 @@ namespace G_coder.ViewModel
         private ObservableCollection<Field> _fields;
         private Field _selectedField;
         private Canvas _drawingPlace;
+        private int _width;
+        private int _height;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,11 +31,6 @@ namespace G_coder.ViewModel
             }
         }
 
-        public ICommand OpenFile
-        {
-            get { return new RelayCommand(OpenFileExecute, CanOpenFileExecute); }
-        }
-
         public ObservableCollection<Field> Fields
         {
             get { return _fields; }
@@ -43,8 +40,6 @@ namespace G_coder.ViewModel
                 OnPropertyChanged(nameof(Fields));
             }
         }
-
-        public Grid MyGrid { get; set; }
 
         public Field SelectedField
         {
@@ -56,19 +51,15 @@ namespace G_coder.ViewModel
             }
         }
 
-        public Canvas DrawingPlace
-        {
-            get { return _drawingPlace; }
-            set
-            {
-                _drawingPlace = value; 
-                OnPropertyChanged(nameof(DrawingPlace));
-            }
-        }
-
         public MainWindowViewModel()
         {
+            Height = 550;
+            Width = 800;
+        }
 
+        public ICommand OpenFile
+        {
+            get { return new RelayCommand(OpenFileExecute, CanOpenFileExecute); }
         }
 
         public void OpenFileExecute()
@@ -87,8 +78,25 @@ namespace G_coder.ViewModel
             return true;
         }
 
+        public int Width
+        {
+            get { return _width; }
+            set
+            {
+                _width = value;
+                OnPropertyChanged(nameof(Width));
+            }
+        }
 
-        
+        public int Height
+        {
+            get { return _height; }
+            set
+            {
+                _height = value;
+                OnPropertyChanged(nameof(Height));
+            }
+        }
 
 
         [NotifyPropertyChangedInvocator]

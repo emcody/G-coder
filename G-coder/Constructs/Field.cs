@@ -12,6 +12,8 @@ namespace G_coder.Constructs
         public Point EndPoint { get; set; }
 
         private List<double> _disances = new List<double>();
+        private int _id;
+
         public List<double> Disances
         {
             get { return _disances; }
@@ -22,14 +24,26 @@ namespace G_coder.Constructs
             }
         }
 
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value; 
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+
         public double Length => Math.Round(Math.Sqrt(Math.Pow(EndPoint.X - StartPoint.X, 2) + Math.Pow(EndPoint.Y - StartPoint.Y, 2)),1);
 
         public Field()
         {
             
         }
-        public Field(double xStart, double xEnd, double yStart, double yEnd)
+
+        public Field(int fieldId, double xStart, double xEnd, double yStart, double yEnd)
         {
+            this.Id = fieldId;
             StartPoint = new Point(xStart, yStart);
             EndPoint = new Point(xEnd, yEnd);
         }

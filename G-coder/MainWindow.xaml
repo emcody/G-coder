@@ -34,7 +34,8 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="2*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Length}" ContentStringFormat="Length: {0}"></Label>
+                            <Label Content="{Binding Length}" ContentStringFormat="Length: {0}" Grid.Column="1"></Label>
+                            <Label Content="{Binding Id}" ContentStringFormat="Id: {0}" Grid.Column="0"></Label>
                         </Grid>
                     </Border>
                 </DataTemplate>

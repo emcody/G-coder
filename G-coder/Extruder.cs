@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using G_coder.Constructs;
@@ -11,12 +10,10 @@ namespace G_coder
     internal class Extruder
     {
         private const string XStartMarker = " 10";
-        private const string XEndMarker = " 11";    
+        private const string XEndMarker = " 11";
         private const string YStartMarker = " 20";
         private const string YEndMarker = " 21";
         private const byte LinesToSearch = 13;
-
-        public Fields Fields { get; set; } = new Fields();
 
 
         private string[] _dxfContent;
@@ -25,18 +22,16 @@ namespace G_coder
         public OnCreatedLinesHandler CreatedLinesHandler;
         //        public event OnCreatedLinesHandler OnCreatedLines;
 
-        public Extruder()
-        {
-        }
+        public Fields Fields { get; set; } = new Fields();
 
         public Fields Begin(string pathToFile)
         {
             LoadFile(pathToFile);
-            var lines = FindLines();
-            lines.SetNearestToCenterAsP0();
-            lines.CalculateDistances();
-            RaiseCreatedLinesHandler(lines);
-            return lines;
+            var fields = FindLines();
+            fields.SetNearestToCenterAsP0();
+            fields.CalculateDistances();
+            RaiseCreatedLinesHandler(fields);
+            return fields;
         }
 
         private void LoadFile(string path)
@@ -56,11 +51,12 @@ namespace G_coder
 
         private Fields FindLines()
         {
-            var lines = new Fields();
+            var fields = new Fields();
             double xStart = 0,
-                    yStart = 0,
-                    xEnd = 0,
-                    yEnd = 0;
+                yStart = 0,
+                xEnd = 0,
+                yEnd = 0;
+            var fieldId = 0;
 
             try
             {
@@ -85,9 +81,9 @@ namespace G_coder
                             if (_dxfContent[j] == YEndMarker)
                             {
                                 yEnd = Math.Round(Convert.ToDouble(_dxfContent[j + 1]), 1);
-                                lines.Add(new Field(xStart, xEnd, yStart, yEnd));
+                                fields.Add(new Field(fieldId, xStart, xEnd, yStart, yEnd));
+                                fieldId++;
                             }
-
                         }
                     }
                 }
@@ -100,8 +96,7 @@ namespace G_coder
             {
                 MessageBox.Show(Convert.ToString(ex.Message));
             }
-            return lines;
-
+            return fields;
         }
 
         public Fields GetRandomLines(int countOfFields, int graphWidth, int graphHeight)
@@ -117,7 +112,7 @@ namespace G_coder
                 var endX = rand.Next(0, graphWidth - bufferToFrame);
                 var startY = rand.Next(5, graphHeight - 10);
                 var endY = rand.Next(5, graphHeight - 10);
-                randomLines.Add(new Field(startX, endX, startY, endY));
+                randomLines.Add(new Field(i, startX, endX, startY, endY));
             }
             randomLines.SetNearestToCenterAsP0();
             randomLines.CalculateDistances();

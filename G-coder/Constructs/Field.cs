@@ -6,13 +6,13 @@ using G_coder.Annotations;
 
 namespace G_coder.Constructs
 {
-    public class Field : INotifyPropertyChanged
+    public class Field 
     {
         public Point StartPoint { get; set; }
+
         public Point EndPoint { get; set; }
 
         private List<double> _disances = new List<double>();
-        private int _id;
 
         public List<double> Disances
         {
@@ -20,19 +20,10 @@ namespace G_coder.Constructs
             set
             {
                 _disances = value;
-                OnPropertyChanged(nameof(Disances));
             }
         }
 
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value; 
-                OnPropertyChanged(nameof(Id));
-            }
-        }
+        public int Id { get; set; }
 
         public double Length => Math.Round(Math.Sqrt(Math.Pow(EndPoint.X - StartPoint.X, 2) + Math.Pow(EndPoint.Y - StartPoint.Y, 2)),1);
 
@@ -48,12 +39,5 @@ namespace G_coder.Constructs
             EndPoint = new Point(xEnd, yEnd);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

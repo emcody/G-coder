@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using System.Windows.Input;
 using G_coder.Constructs;
 using G_coder.Properties;
@@ -14,6 +15,7 @@ namespace G_coder.ViewModel
         private readonly Extruder _extruder = new Extruder();
         private ObservableCollection<Field> _fields;
         private Field _selectedField;
+        private Canvas _drawingPlace;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -37,10 +39,18 @@ namespace G_coder.ViewModel
             get { return _fields; }
             set
             {
+                DrawFields();
                 _fields = value;
                 OnPropertyChanged(nameof(Fields));
             }
         }
+
+        private void DrawFields()
+        {
+
+        }
+
+        public Grid MyGrid { get; set; }
 
         public Field SelectedField
         {
@@ -49,6 +59,16 @@ namespace G_coder.ViewModel
             {
                 _selectedField = value; 
                 OnPropertyChanged(nameof(SelectedField));
+            }
+        }
+
+        public Canvas DrawingPlace
+        {
+            get { return _drawingPlace; }
+            set
+            {
+                _drawingPlace = value; 
+                OnPropertyChanged(nameof(DrawingPlace));
             }
         }
 

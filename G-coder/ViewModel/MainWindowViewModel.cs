@@ -18,7 +18,7 @@ namespace G_coder.ViewModel
         private Canvas _drawingPlace;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public string Path
         {
             get { return _path; }
@@ -39,15 +39,9 @@ namespace G_coder.ViewModel
             get { return _fields; }
             set
             {
-                DrawFields();
                 _fields = value;
                 OnPropertyChanged(nameof(Fields));
             }
-        }
-
-        private void DrawFields()
-        {
-
         }
 
         public Grid MyGrid { get; set; }

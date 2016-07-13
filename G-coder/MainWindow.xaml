@@ -23,7 +23,6 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Grid.Row="0" Margin="10,10" Command="{Binding OpenFile}">Open File</Button>
         <Label Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="0" Margin="10,10" Content="{Binding Path}" BorderThickness="1" BorderBrush="Black"></Label>
-        <Canvas Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Background="Lavender"></Canvas>
         <Label Grid.Column="0" Grid.Row="1" Margin="10,10" Content="{Binding Fields.Count}" ContentStringFormat="Fields count: {0}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="1" Grid.Row="1" Margin="10,10" Content="{Binding SelectedField.Id}" ContentStringFormat="Selected field: {0}" BorderThickness="1" BorderBrush="Black"></Label>
         <ListView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" ItemsSource="{Binding Fields}" SelectedItem="{Binding SelectedField}">
@@ -41,13 +40,27 @@
                             </Grid.RowDefinitions>
                             <Label Content="{Binding Length}" ContentStringFormat="Length: {0}" Grid.Column="1" FontSize="11"></Label>
                             <Label Content="{Binding Id}" ContentStringFormat="Id: {0}" Grid.Column="0" Grid.RowSpan="2" FontSize="11"></Label>
-                            
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+        <ItemsControl ItemsSource="{Binding Fields}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderThickness="1" BorderBrush="Black">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Line X1="{Binding StartPoint.X}" Y1="{Binding StartPoint.Y}"
+                      X2="{Binding EndPoint.X}" Y2="{Binding EndPoint.Y}"
+                      Stroke="DarkGray" StrokeThickness="2"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>
+
+
 

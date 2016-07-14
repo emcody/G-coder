@@ -7,20 +7,17 @@ namespace G_coder
 {
     public delegate void OnCreatedLinesHandler(Fields fields);
 
-    internal class Extruder
+    internal class DxfConverter
     {
         private const string XStartMarker = " 10";
         private const string XEndMarker = " 11";
         private const string YStartMarker = " 20";
         private const string YEndMarker = " 21";
-        private const byte LinesToSearch = 13;
-
+        private const byte FrameLength = 13;
 
         private string[] _dxfContent;
-
-
+        
         public OnCreatedLinesHandler CreatedLinesHandler;
-        //        public event OnCreatedLinesHandler OnCreatedLines;
 
         public Fields Fields { get; set; } = new Fields();
 
@@ -48,7 +45,7 @@ namespace G_coder
                 _dxfContent[i] = Convert.ToString(_dxfContent[i].Replace('.', ','));
             }
         }
-
+        
         private Fields FindLines()
         {
             var fields = new Fields();
@@ -64,7 +61,7 @@ namespace G_coder
                 {
                     if (_dxfContent[i] == "SILIKON" || _dxfContent[i] == "Silikon" || _dxfContent[i] == "silikon")
                     {
-                        for (var j = i; j < i + LinesToSearch; j++)
+                        for (var j = i; j < i + FrameLength; j++)
                         {
                             if (_dxfContent[j] == XStartMarker)
                             {
@@ -99,11 +96,11 @@ namespace G_coder
             return fields;
         }
 
-        public Fields GetRandomLines(int countOfFields, int graphWidth, int graphHeight)
+        public Fields GetRandomFields(int countOfFields, int graphWidth, int graphHeight)
         {
+            //TODO change bufferToFrame using
             var randomLines = new Fields();
             const int bufferToFrame = 30;
-            //            var numberOfPoints = countOfFields + 6;
             var rand = new Random();
 
             for (var i = 0; i < countOfFields; i++)

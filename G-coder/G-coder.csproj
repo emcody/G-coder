@@ -59,7 +59,7 @@
     <Compile Include="Constructs\Fields.cs" />
     <Compile Include="Constructs\Point.cs" />
     <Compile Include="Model\Result.cs" />
-    <Compile Include="Extruder.cs" />
+    <Compile Include="DxfConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

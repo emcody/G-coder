@@ -12,7 +12,7 @@ namespace G_coder.ViewModel
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
         private string _path;
-        private readonly Extruder _extruder = new Extruder();
+        private readonly DxfConverter _dxfConverter = new DxfConverter();
         private ObservableCollection<Field> _fields;
         private Field _selectedField;
         private Canvas _drawingPlace;
@@ -69,7 +69,7 @@ namespace G_coder.ViewModel
             if (result == true)
             {
                 Path = ofd.SafeFileName;
-                Fields = _extruder.Begin(ofd.FileName);
+                Fields = _dxfConverter.Begin(ofd.FileName);
             }
         }
 

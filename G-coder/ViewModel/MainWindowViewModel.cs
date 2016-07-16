@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using G_coder.Constructs;
 using G_coder.Properties;
+using G_coder.Utility;
 using Microsoft.Win32;
 
 namespace G_coder.ViewModel
@@ -86,6 +87,7 @@ namespace G_coder.ViewModel
                 _width = value;
                 OnPropertyChanged(nameof(Width));
             }
+            Messenger.Default.Send(Fields);
         }
 
         public int Height

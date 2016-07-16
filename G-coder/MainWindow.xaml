@@ -25,6 +25,7 @@
         <Label Grid.Column="1" Grid.Row="0" Margin="15,15" Content="{Binding Path}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="0" Grid.Row="1" Margin="0,15" Content="{Binding Fields.Count}" ContentStringFormat="Fields count: {0}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="1" Grid.Row="1" Margin="15,15" Content="{Binding SelectedField.Id}" ContentStringFormat="Selected field: {0}" BorderThickness="1" BorderBrush="Black"></Label>
+        <Button Grid.Row="1" Grid.Column="3" Margin="50,15" Command="{Binding OpenGCodeView}">Create GCode</Button>
         <ListView Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Grid.ColumnSpan="2" ItemsSource="{Binding Fields}" SelectedItem="{Binding SelectedField}">
             <ListView.ItemTemplate>
                 <DataTemplate >

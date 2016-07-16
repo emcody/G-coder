@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 using G_coder.Constructs;
 using G_coder.Properties;
+using G_coder.Services;
 using G_coder.Utility;
 using Microsoft.Win32;
 
@@ -12,16 +14,22 @@ namespace G_coder.ViewModel
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        private string _path;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly DxfConverter _dxfConverter = new DxfConverter();
-        private ObservableCollection<Field> _fields;
-        private Field _selectedField;
         private Canvas _drawingPlace;
-        private int _width;
+        private ObservableCollection<Field> _fields;
         private int _height;
+        private string _path;
+        private Field _selectedField;
+        private int _width;
         private DialogService _dialogService= new DialogService();
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public MainWindowViewModel()
+        {
+            Height = 550;
+            Width = 800;
+        }
 
         public string Path
         {
@@ -48,21 +56,41 @@ namespace G_coder.ViewModel
             get { return _selectedField; }
             set
             {
-                _selectedField = value; 
+                _selectedField = value;
                 OnPropertyChanged(nameof(SelectedField));
             }
         }
 
-        public MainWindowViewModel()
+        public int Width
         {
-            Height = 550;
-            Width = 800;
+            get { return _width; }
+            set
+            {
+                _width = value;
+                OnPropertyChanged(nameof(Width));
+            }
+        }
+
+        public int Height
+        {
+            get { return _height; }
+            set
+            {
+                _height = value;
+                OnPropertyChanged(nameof(Height));
+            }
         }
 
         public ICommand OpenFile
         {
             get { return new RelayCommand(OpenFileExecute, CanOpenFileExecute); }
         }
+
+        public ICommand OpenGCodeView
+        {
+            get { return new RelayCommand(OpenGcodeViewExecute, CanOpenGCodeExecute); }
+        }
+
 
         public void OpenFileExecute()
         {
@@ -80,28 +108,17 @@ namespace G_coder.ViewModel
             return true;
         }
 
-        public int Width
+        private void OpenGcodeViewExecute()
         {
-            get { return _width; }
-            set
-            {
-                _width = value;
-                OnPropertyChanged(nameof(Width));
-            }
             Messenger.Default.Send(Fields);
             _dialogService.ShowDialog();
         }
 
-        public int Height
+        private bool CanOpenGCodeExecute()
         {
-            get { return _height; }
-            set
-            {
-                _height = value;
-                OnPropertyChanged(nameof(Height));
-            }
+            return Fields != null;
         }
-
+        
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

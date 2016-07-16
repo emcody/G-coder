@@ -19,6 +19,7 @@ namespace G_coder.ViewModel
         private Canvas _drawingPlace;
         private int _width;
         private int _height;
+        private DialogService _dialogService= new DialogService();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -88,6 +89,7 @@ namespace G_coder.ViewModel
                 OnPropertyChanged(nameof(Width));
             }
             Messenger.Default.Send(Fields);
+            _dialogService.ShowDialog();
         }
 
         public int Height

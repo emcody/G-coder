@@ -85,7 +85,7 @@ namespace G_coder
                     }
                 }
             }
-            catch (IndexOutOfRangeException ex)
+            catch (IndexOutOfRangeException)
             {
                 MessageBox.Show(@"Open file first.");
             }

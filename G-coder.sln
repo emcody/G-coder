@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G-coder", "G-coder\G-coder.csproj", "{D3F3688A-2319-4E31-8216-D1867D5B3E07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G-coder.DxfConverter", "G-coder.DxfConverter\G-coder.DxfConverter.csproj", "{CA12E7C1-B721-4909-9BAE-426FD279025C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G-coder.Model", "G-coder.Model\G-coder.Model.csproj", "{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D3F3688A-2319-4E31-8216-D1867D5B3E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3F3688A-2319-4E31-8216-D1867D5B3E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3F3688A-2319-4E31-8216-D1867D5B3E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA12E7C1-B721-4909-9BAE-426FD279025C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA12E7C1-B721-4909-9BAE-426FD279025C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA12E7C1-B721-4909-9BAE-426FD279025C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA12E7C1-B721-4909-9BAE-426FD279025C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

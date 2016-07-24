@@ -55,11 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Constructs\Field.cs" />
-    <Compile Include="Constructs\Fields.cs" />
-    <Compile Include="Constructs\Point.cs" />
-    <Compile Include="Model\Result.cs" />
-    <Compile Include="DxfConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -114,7 +109,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\G-coder.DxfConverter\G-coder.DxfConverter.csproj">
+      <Project>{ca12e7c1-b721-4909-9bae-426fd279025c}</Project>
+      <Name>G-coder.DxfConverter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\G-coder.Model\G-coder.Model.csproj">
+      <Project>{86ac33f1-ab5a-4b59-8ec3-2073790f4fa0}</Project>
+      <Name>G-coder.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

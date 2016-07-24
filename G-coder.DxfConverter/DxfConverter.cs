@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
-using G_coder.Constructs;
+using System.Windows.Forms;
+using G_coder.Model;
 
-namespace G_coder
+namespace G_coder.DxfConverter
 {
     public delegate void OnCreatedLinesHandler(Fields fields);
 
-    internal class DxfConverter
+    public class DxfConverter : IDxfConverter
     {
         private const string XStartMarker = " 10";
         private const string XEndMarker = " 11";
@@ -16,26 +16,32 @@ namespace G_coder
         private const byte FrameLength = 13;
 
         private string[] _dxfContent;
-        
+
+        private Fields _fields;
+
         public OnCreatedLinesHandler CreatedLinesHandler;
 
         public Fields Fields { get; set; } = new Fields();
 
-        public Fields Begin(string pathToFile)
+        private void Calculate()
         {
-            LoadFile(pathToFile);
-            var fields = FindLines();
-            fields.SetNearestToCenterAsP0();
-            fields.CalculateDistances();
-            RaiseCreatedLinesHandler(fields);
-            return fields;
+            _fields = FindLines();
+            _fields.SetNearestToCenterAsP0();
+            _fields.CalculateDistances();
+            RaiseCreatedLinesHandler(_fields);
         }
 
-        private void LoadFile(string path)
+        public void LoadFile(string pathToFile)
         {
-            //TODO add exception when path string is incorrect
-            _dxfContent = File.ReadAllLines(path);
+            //TODO add exception when pathToFile string is incorrect
+            _dxfContent = File.ReadAllLines(pathToFile);
             ChangeDotToComma();
+            Calculate();
+        }
+
+        public Fields GetFields()
+        {
+            return _fields;
         }
 
         private void ChangeDotToComma()
@@ -45,7 +51,7 @@ namespace G_coder
                 _dxfContent[i] = Convert.ToString(_dxfContent[i].Replace('.', ','));
             }
         }
-        
+
         private Fields FindLines()
         {
             var fields = new Fields();

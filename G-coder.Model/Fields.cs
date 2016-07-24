@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace G_coder.Constructs
+namespace G_coder.Model
 {
     public class Fields : ObservableCollection<Field>
     {

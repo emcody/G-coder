@@ -1,4 +1,4 @@
-namespace G_coder.Constructs
+namespace G_coder.Model
 {
     public class Point
     {

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
-using G_coder.Constructs;
+using G_coder.DxfConverter;
+using G_coder.Model;
 using G_coder.Properties;
 using G_coder.Services;
 using G_coder.Utility;
@@ -14,16 +14,13 @@ namespace G_coder.ViewModel
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private readonly DxfConverter _dxfConverter = new DxfConverter();
-        private Canvas _drawingPlace;
+        private readonly DialogService _dialogService = new DialogService();
+        private readonly IDxfConverter _dxfConverter = new DxfConverter.DxfConverter();
         private ObservableCollection<Field> _fields;
         private int _height;
         private string _path;
         private Field _selectedField;
         private int _width;
-        private DialogService _dialogService= new DialogService();
 
         public MainWindowViewModel()
         {
@@ -91,6 +88,8 @@ namespace G_coder.ViewModel
             get { return new RelayCommand(OpenGcodeViewExecute, CanOpenGCodeExecute); }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public void OpenFileExecute()
         {
@@ -100,7 +99,8 @@ namespace G_coder.ViewModel
             if (result == true)
             {
                 Path = ofd.SafeFileName;
-                Fields = _dxfConverter.Begin(ofd.FileName);
+                _dxfConverter.LoadFile(ofd.FileName);
+                Fields = _dxfConverter.GetFields();
             }
         }
 
@@ -119,7 +119,7 @@ namespace G_coder.ViewModel
         {
             return Fields != null;
         }
-        
+
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using G_coder.Annotations;
 
-namespace G_coder.Constructs
+namespace G_coder.Model
 {
     public class Field 
     {

@@ -1,6 +1,12 @@
-﻿namespace G_coder.DxfConverter
+﻿using G_coder.Model;
+
+namespace G_coder.DxfConverter
 {
-    public class IDxfConverter
+    public interface IDxfConverter
     {
+        void LoadFile(string pathToFile);
+
+        Fields GetFields();
+
     }
 }

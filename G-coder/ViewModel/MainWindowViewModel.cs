@@ -95,6 +95,7 @@ namespace G_coder.ViewModel
         public void OpenFileExecute()
         {
             var ofd = new OpenFileDialog();
+            ofd.Filter = "Dxf file (*.dxf)|*.dxf";
             var result = ofd.ShowDialog();
             if (result == true)
             {

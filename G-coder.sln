@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G-coder.DxfConverter", "G-c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G-coder.Model", "G-coder.Model\G-coder.Model.csproj", "{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G-coder.GCodeCreator", "G-coder.GCodeCreator\G-coder.GCodeCreator.csproj", "{8E16EF37-D749-4769-9C96-5B5D149E515D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86AC33F1-AB5A-4B59-8EC3-2073790F4FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E16EF37-D749-4769-9C96-5B5D149E515D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E16EF37-D749-4769-9C96-5B5D149E515D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E16EF37-D749-4769-9C96-5B5D149E515D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E16EF37-D749-4769-9C96-5B5D149E515D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

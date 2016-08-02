@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using G_coder.Model;
 using G_coder.View;
-using G_coder.ViewModel;
 
 namespace G_coder.Services
 {

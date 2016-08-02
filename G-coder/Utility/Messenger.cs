@@ -8,16 +8,14 @@ namespace G_coder.Utility
     public class Messenger
     {
         private static readonly object CreationLock = new object();
-
-        private static readonly ConcurrentDictionary<MessengerKey, object> Dictionary =
-            new ConcurrentDictionary<MessengerKey, object>();
+        private static readonly ConcurrentDictionary<MessengerKey, object> Dictionary = new ConcurrentDictionary<MessengerKey, object>();
 
         #region Default property
 
         private static Messenger _instance;
 
         /// <summary>
-        ///     Gets the single instance of the Messenger.
+        /// Gets the single instance of the Messenger.
         /// </summary>
         public static Messenger Default
         {
@@ -41,15 +39,15 @@ namespace G_coder.Utility
         #endregion
 
         /// <summary>
-        ///     Initializes a new instance of the Messenger class.
+        /// Initializes a new instance of the Messenger class.
         /// </summary>
         private Messenger()
         {
         }
 
         /// <summary>
-        ///     Registers a recipient for a type of message T. The action parameter will be executed
-        ///     when a corresponding message is sent.
+        /// Registers a recipient for a type of message T. The action parameter will be executed
+        /// when a corresponding message is sent.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="recipient"></param>
@@ -60,8 +58,8 @@ namespace G_coder.Utility
         }
 
         /// <summary>
-        ///     Registers a recipient for a type of message T and a matching context. The action parameter will be executed
-        ///     when a corresponding message is sent.
+        /// Registers a recipient for a type of message T and a matching context. The action parameter will be executed
+        /// when a corresponding message is sent.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="recipient"></param>
@@ -74,8 +72,8 @@ namespace G_coder.Utility
         }
 
         /// <summary>
-        ///     Unregisters a messenger recipient completely. After this method is executed, the recipient will
-        ///     no longer receive any messages.
+        /// Unregisters a messenger recipient completely. After this method is executed, the recipient will
+        /// no longer receive any messages.
         /// </summary>
         /// <param name="recipient"></param>
         public void Unregister(object recipient)
@@ -84,9 +82,8 @@ namespace G_coder.Utility
         }
 
         /// <summary>
-        ///     Unregisters a messenger recipient with a matching context completely. After this method is executed, the recipient
-        ///     will
-        ///     no longer receive any messages.
+        /// Unregisters a messenger recipient with a matching context completely. After this method is executed, the recipient will
+        /// no longer receive any messages.
         /// </summary>
         /// <param name="recipient"></param>
         /// <param name="context"></param>
@@ -98,8 +95,8 @@ namespace G_coder.Utility
         }
 
         /// <summary>
-        ///     Sends a message to registered recipients. The message will reach all recipients that are
-        ///     registered for this message type.
+        /// Sends a message to registered recipients. The message will reach all recipients that are
+        /// registered for this message type.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="message"></param>
@@ -109,8 +106,8 @@ namespace G_coder.Utility
         }
 
         /// <summary>
-        ///     Sends a message to registered recipients. The message will reach all recipients that are
-        ///     registered for this message type and matching context.
+        /// Sends a message to registered recipients. The message will reach all recipients that are
+        /// registered for this message type and matching context.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="message"></param>
@@ -139,11 +136,11 @@ namespace G_coder.Utility
 
         protected class MessengerKey
         {
-            public object Recipient { get; }
-            public object Context { get; }
+            public object Recipient { get; private set; }
+            public object Context { get; private set; }
 
             /// <summary>
-            ///     Initializes a new instance of the MessengerKey class.
+            /// Initializes a new instance of the MessengerKey class.
             /// </summary>
             /// <param name="recipient"></param>
             /// <param name="context"></param>
@@ -154,7 +151,7 @@ namespace G_coder.Utility
             }
 
             /// <summary>
-            ///     Determines whether the specified MessengerKey is equal to the current MessengerKey.
+            /// Determines whether the specified MessengerKey is equal to the current MessengerKey.
             /// </summary>
             /// <param name="other"></param>
             /// <returns></returns>
@@ -164,7 +161,7 @@ namespace G_coder.Utility
             }
 
             /// <summary>
-            ///     Determines whether the specified MessengerKey is equal to the current MessengerKey.
+            /// Determines whether the specified MessengerKey is equal to the current MessengerKey.
             /// </summary>
             /// <param name="obj"></param>
             /// <returns></returns>
@@ -174,21 +171,21 @@ namespace G_coder.Utility
                 if (ReferenceEquals(this, obj)) return true;
                 if (obj.GetType() != GetType()) return false;
 
-                return Equals((MessengerKey) obj);
+                return Equals((MessengerKey)obj);
             }
 
             /// <summary>
-            ///     Serves as a hash function for a particular type.
+            /// Serves as a hash function for a particular type. 
             /// </summary>
             /// <returns></returns>
             public override int GetHashCode()
             {
                 unchecked
                 {
-                    return ((Recipient != null ? Recipient.GetHashCode() : 0)*397) ^
-                           (Context != null ? Context.GetHashCode() : 0);
+                    return ((Recipient != null ? Recipient.GetHashCode() : 0) * 397) ^ (Context != null ? Context.GetHashCode() : 0);
                 }
             }
         }
     }
+
 }

@@ -55,10 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Messages\MainWindowMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Utility\Messenger.cs" />
+    <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModel\GCodeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
@@ -113,6 +115,10 @@
     <ProjectReference Include="..\G-coder.DxfConverter\G-coder.DxfConverter.csproj">
       <Project>{ca12e7c1-b721-4909-9bae-426fd279025c}</Project>
       <Name>G-coder.DxfConverter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\G-coder.GCodeCreator\G-coder.GCodeCreator.csproj">
+      <Project>{8e16ef37-d749-4769-9c96-5b5d149e515d}</Project>
+      <Name>G-coder.GCodeCreator</Name>
     </ProjectReference>
     <ProjectReference Include="..\G-coder.Model\G-coder.Model.csproj">
       <Project>{86ac33f1-ab5a-4b59-8ec3-2073790f4fa0}</Project>

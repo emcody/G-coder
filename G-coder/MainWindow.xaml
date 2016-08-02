@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:G_coder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="{Binding Height, Mode=TwoWay}" Width="{Binding Width, Mode=TwoWay}" MinWidth="800" MinHeight="550" Background="White" >
-    <Grid DataContext="{Binding}">
+        Title="G-coder" Height="{Binding Height, Mode=TwoWay}" Width="{Binding Width, Mode=TwoWay}" MinWidth="800" MinHeight="550" Background="White" 
+        DataContext="{Binding Source={StaticResource mainViewModelLocator}, Path=MainWindowViewModel}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Grid.Row="0" Width="70" Height="30" Command="{Binding OpenFile}">Open File</Button>
-        <Label Grid.Column="1" Grid.Row="0" Margin="15,15" Content="{Binding Path}" BorderThickness="1" BorderBrush="Black"></Label>
+        <Label Grid.Column="1" Grid.Row="0" Margin="15,15" Content="{Binding FileName}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="0" Grid.Row="1" Margin="0,15" Content="{Binding Fields.Count}" ContentStringFormat="Fields count: {0}" BorderThickness="1" BorderBrush="Black"></Label>
         <Label Grid.Column="1" Grid.Row="1" Margin="15,15" Content="{Binding SelectedField.Id}" ContentStringFormat="Selected field: {0}" BorderThickness="1" BorderBrush="Black"></Label>
         <Button Grid.Row="1" Grid.Column="3" Margin="50,15" Command="{Binding OpenGCodeView}">Create GCode</Button>

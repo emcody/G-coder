@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("G-coder.DxfConverter")]
+[assembly: AssemblyTitle("G-coder.GCodeCreator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("G-coder.DxfConverter")]
+[assembly: AssemblyProduct("G-coder.GCodeCreator")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ca12e7c1-b721-4909-9bae-426fd279025c")]
+[assembly: Guid("8e16ef37-d749-4769-9c96-5b5d149e515d")]
 
 // Version information for an assembly consists of the following four values:
 //

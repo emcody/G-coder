@@ -1,7 +1,7 @@
-﻿using System;
+﻿using G_coder.Model;
+using System;
 using System.IO;
 using System.Windows.Forms;
-using G_coder.Model;
 
 namespace G_coder.DxfConverter
 {
@@ -14,6 +14,8 @@ namespace G_coder.DxfConverter
         private const string YStartMarker = " 20";
         private const string YEndMarker = " 21";
         private const byte FrameLength = 13;
+
+        private string _layerName = "silikon";
 
         private string[] _dxfContent;
 
@@ -31,7 +33,7 @@ namespace G_coder.DxfConverter
             RaiseCreatedLinesHandler(_fields);
         }
 
-        public void LoadFile(string pathToFile)
+        public void ConvertToFields(string pathToFile)
         {
             //TODO add exception when pathToFile string is incorrect
             _dxfContent = File.ReadAllLines(pathToFile);
@@ -65,7 +67,7 @@ namespace G_coder.DxfConverter
             {
                 for (var i = 0; i < _dxfContent.Length; i++)
                 {
-                    if (_dxfContent[i] == "SILIKON" || _dxfContent[i] == "Silikon" || _dxfContent[i] == "silikon")
+                    if (string.Equals(_dxfContent[i], _layerName, StringComparison.CurrentCultureIgnoreCase))
                     {
                         for (var j = i; j < i + FrameLength; j++)
                         {

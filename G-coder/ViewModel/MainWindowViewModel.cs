@@ -1,24 +1,23 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Input;
-using G_coder.DxfConverter;
+﻿using G_coder.DxfConverter;
+using G_coder.Messages;
 using G_coder.Model;
 using G_coder.Properties;
 using G_coder.Services;
 using G_coder.Utility;
 using Microsoft.Win32;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace G_coder.ViewModel
 {
-    internal class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly DialogService _dialogService = new DialogService();
         private readonly IDxfConverter _dxfConverter = new DxfConverter.DxfConverter();
-        private ObservableCollection<Field> _fields;
+        private Fields _fields;
         private int _height;
-        private string _path;
+        private string _fileName;
         private Field _selectedField;
         private int _width;
 
@@ -28,17 +27,17 @@ namespace G_coder.ViewModel
             Width = 800;
         }
 
-        public string Path
+        public string FileName
         {
-            get { return _path; }
+            get { return _fileName; }
             set
             {
-                _path = value;
-                OnPropertyChanged(nameof(Path));
+                _fileName = value;
+                OnPropertyChanged(nameof(FileName));
             }
         }
 
-        public ObservableCollection<Field> Fields
+        public Fields Fields
         {
             get { return _fields; }
             set
@@ -90,16 +89,15 @@ namespace G_coder.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
         public void OpenFileExecute()
         {
-            var ofd = new OpenFileDialog();
-            ofd.Filter = "Dxf file (*.dxf)|*.dxf";
+            var ofd = new OpenFileDialog { Filter = "Dxf file (*.dxf)|*.dxf" };
             var result = ofd.ShowDialog();
             if (result == true)
             {
-                Path = ofd.SafeFileName;
-                _dxfConverter.LoadFile(ofd.FileName);
+                FileName = ofd.SafeFileName;
+
+                _dxfConverter.ConvertToFields(ofd.FileName);
                 Fields = _dxfConverter.GetFields();
             }
         }
@@ -111,7 +109,7 @@ namespace G_coder.ViewModel
 
         private void OpenGcodeViewExecute()
         {
-            Messenger.Default.Send(Fields);
+            Messenger.Default.Send<MainWindowMessage>(new MainWindowMessage(FileName, Fields));
             _dialogService.ShowDialog();
         }
 

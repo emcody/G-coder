@@ -4,7 +4,7 @@ namespace G_coder.DxfConverter
 {
     public interface IDxfConverter
     {
-        void LoadFile(string pathToFile);
+        void ConvertToFields(string pathToFile);
 
         Fields GetFields();
 

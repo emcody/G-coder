@@ -11,7 +11,6 @@ namespace G_coder.View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
         }
     }
 }

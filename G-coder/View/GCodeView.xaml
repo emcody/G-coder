@@ -3,10 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:G_coder.View"
         mc:Ignorable="d"
-        Title="GCodeView" Height="300" Width="300">
+        Title="G-coder" Height="500" Width="600"
+        DataContext="{Binding Source={StaticResource mainViewModelLocator}, Path=GCodeViewModel}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Height="40" Width="180" BorderBrush="Black" BorderThickness="1" Content="{Binding Fields.Count}" ContentStringFormat="Fields count: {0}"></Label>
+        <Button Grid.Column="0" Grid.Row="1" Width="90" Height="30" Command="{Binding CreateGCode}">Create G-code</Button>
+        <ListBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding GCode}"></ListBox>
+        <Label Grid.Column="3" Grid.Row="0" Width="90" Height="30" Content="Safe Z height:"></Label>
+        <Label Grid.Column="3" Grid.Row="1" Width="90" Height="30" Content="Work Z height:"></Label>
+        <Label Grid.Column="3" Grid.Row="2" Width="90" Height="30" Content="Forward Speed:"></Label>
+        <TextBox Grid.Column="5" Grid.Row="0" Width="60" Height="30" Text="{Binding GCodeSettings.SafeHeightZ, Mode=TwoWay}" ></TextBox>
+        <TextBox Grid.Column="5" Grid.Row="1" Width="60" Height="30" Text="{Binding GCodeSettings.WorkingHeightZ, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Column="5" Grid.Row="2" Width="60" Height="30" Text="{Binding GCodeSettings.ForwardSpeed, Mode=TwoWay}"></TextBox>
+        <Button Grid.Column="2" Grid.Row="2" Width="60" Height="30" Command="{Binding SaveFile}">Save File</Button>
     </Grid>
 </Window>
